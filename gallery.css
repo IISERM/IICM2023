@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+body {
+  background-color: #f6efff;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    flex-direction: column;
+    background-image: url(./assets/footer.png);
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: bottom;
+}
+
+.title {
+    height: 15vh;
+    display: flex;
+    width: 100vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.title h1 {
+    font-family: 'Rampart One', sans-serif;
+}
+
+.title > a > img{
+  height: 5rem;
+  margin-left: 1rem;
+}
+
+#gallery {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%); 
+  user-select: none; /* -- Prevent image highlighting -- */
+}
+
+#gallery > .image {
+  width: 50vmin;
+  height: 60vmin;
+  border: 0px;
+  border-radius: 15px;
+  filter: drop-shadow(5px 5px 4px #000000);
+  object-fit: cover;
+  object-position: 100% center;
+}
+
+@media only screen and (max-width: 600px) {
+
+  #gallery {
+    height: 60vh;
+    transform: translate(-45%, -40%); 
+    position: fixed;
+    width: fit-content;
+  }
+
+
+  .container {
+    background-image: url('assets/footer.png');
+    height: 85vh;
+    width: 100vw;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+.title > a > img{
+  height: 2.5rem;
+}
+  
+}
+@media only screen and (max-width: 1080px) {
+
+  #gallery {
+    height: 60vh;
+    transform: translate(-45%, -40%); 
+    position: fixed;
+    width: fit-content;
+  }
+
+
+  .container {
+    background-image: url('assets/footer.png');
+    height: 85vh;
+    width: 100vw;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+.title > a > img{
+  height: 2.5rem;
+}
+  
+}
