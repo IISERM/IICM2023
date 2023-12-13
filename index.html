@@ -4,55 +4,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./main.css">
-    <script src="./dist/bundle.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="dist/bundle.js"></script>
+    <script src="src/navbar.js"></script>
     <title>IICM 2023</title>
 </head>
 
 <body>
     <div class="page-wrapper">
 
-        <section class="section header" id="section1">
-            <div class="navbar">
-                <img src="./assets/logo.svg" alt="">
-                <ul class="navbar-links">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="#section2">GALLERY</a></li>
-                    <li><a href="contact.html">SCHEDULE</a></li>
-                </ul>
-            </div>
-            <div class="hero">IICM</div>
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="navbar-underlay"></div>
+                <div class="navbar">
+                    <ul class="navbar-links">
+                        <li><a href="#home">HOME</a></li>
+                        <li><a href="#gallery">GALLERY</a></li>
+                        <li><a href="#schedule">SCHEDULE</a></li>
+                        <li><a href="#leaderboard">LEADERBOARD</a></li>
+                    </ul>
+                </div>
+                <img class="logo" src="./assets/elements/text-logo.svg">
         </section>
 
         <!-- <hr> -->
 
-        <section class="section gallery" id="section2">
-            <div class="title">
-                <h1 class="title">GALLERY</h1>
-            </div>
-            <div class="container">
-                <div id="gallery" data-mouse-down-at="0" data-prev-percentage="0">
-                    <img class="image" src="assets/1.jpg" alt="" draggable="false">
-                    <img class="image " src="assets/2.jpg" alt="" draggable="false">
-                    <img class="image" src="assets/3.jpg" alt="" draggable="false">
-                    <img class="image" src="assets/4.jpg" alt="" draggable="false">
+        <section class="timeline" id="schedule">
+            <div class="timeline-container">
+                <div class="timeline-overlay"></div>
+        
+                <div class="timeline-details">
+                    EVENTS!
+                </div>
+        
+                <div class="timeline-content">
+                    <ul>
+                        <li class="day" id="day-1">&nbspDAY 1</li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="day" id="day-2">&nbspDAY 2</li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="day" id="day-3">&nbspDAY 3</li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <img class="event-poster" src="assets/posters/poster.png">
+                            <div class="event-details">
+                                <h1>Lorem, ipsum.</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, molestiae.</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- <hr> -->
 
-        <section class="section timeline" id="section3">
-            <div class="footer">
-
+        <section class="gallery" id="gallery">
+            <div class="title">
+                <h1 class="title">GALLERY</h1>
             </div>
+            <div class="gallery-container">
+                <div id="track" data-mouse-down-at="0" data-prev-percentage="0">
+                    <img class="image" src="assets/gallery/1.png" alt="" draggable="false">
+                    <img class="image" src="assets/gallery/2.png" alt="" draggable="false">
+                    <img class="image" src="assets/gallery/3.png" alt="" draggable="false">
+                    <img class="image" src="assets/gallery/4.png" alt="" draggable="false">
+                    <img class="image" src="assets/gallery/5.png" alt="" draggable="false">
+                </div>
+            </div>
+        </section>
+
+        <!-- <hr> -->
+
+        <section class="leaderboard" id="leaderboard">
         </section>
 
     </div>
 </body>
 
-<script src="gallery.js">
-
-</script>
+<script src="src/gallery.js"></script>
 
 </html>
