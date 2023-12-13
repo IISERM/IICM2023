@@ -1,4 +1,4 @@
-const track = document.getElementById("gallery");
+const track = document.getElementById("track");
 
 const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
@@ -16,10 +16,8 @@ const handleOnMove = e => {
   const percentage = (mouseDelta / maxDelta) * -100,
     nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
     nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-  console.log(percentage)
 
   track.dataset.percentage = nextPercentage;
-  console.log(nextPercentage)
 
   track.animate({
     transform: `translate(${nextPercentage}%, -40%)`
