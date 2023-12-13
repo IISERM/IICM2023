@@ -22,7 +22,7 @@ const handleOnMove = e => {
   console.log(nextPercentage)
 
   track.animate({
-    transform: `translate(${nextPercentage}%, -50%)`
+    transform: `translate(${nextPercentage}%, -40%)`
   }, { duration: 1200, fill: "forwards" });
 
   for (const image of track.getElementsByClassName("image")) {
