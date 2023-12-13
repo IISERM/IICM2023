@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body{
+    margin: 0;
+    overflow-x: hidden;
+}
+
+
+.page-wrapper {
+    margin: 0;
+    min-height: 100vh;
+}
+
+section {
+    height: 100vh;
+}
+
+/* Landing */
+
+.header {
+    background-image: url('assets/elements/hero-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5vh;
+    width: 100%;
+    margin-top: 2vh;
+}
+
+.navbar img {
+    height: 7vh;
+    margin-left: 2vh;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    width: 20vw;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 5vh;
+    padding: 0;
+
+}
+
+.navbar-links li {
+    display: inline;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: springgreen;
+    
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 8vh;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: #fff;
+}
+
+
+/* Footer */
+
+/* .footer-img {
+    bottom: 0;
+    left: 0;
+    width: 100vmax;
+    height: 100%;
+    overflow: hidden;
+} */
+
+.footer {
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/elements/footer.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    display: block;
+}
+
+/* GALLERY */
+
+#section2{
+  background-color: #f6efff;
+  overflow: hidden;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    flex-direction: column;
+    background-image: url('assets/elements/footer.png');
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: bottom;
+}
+
+.title {
+    height: 15vh;
+    display: flex;
+    width: 100vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.title h1 {
+    font-family: 'Rampart One', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+#gallery {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  transform: translate(0%, -40%); 
+  user-select: none; /* -- Prevent image highlighting -- */
+}
+
+#gallery > .image {
+  width: 50vmin;
+  height: 60vmin;
+  border: 0px;
+  border-radius: 15px;
+  filter: drop-shadow(5px 5px 4px #000000);
+  object-fit: cover;
+  object-position: 100% center;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .container {
+        position: relative;
+    }
+
+#gallery {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  overflow: hidden;
+  transform: translate(0%, -40%); 
+  user-select: none; /* -- Prevent image highlighting -- */
+  padding: 1rem;
+}
+
+}
+@media only screen and (max-width: 850px) {
+
+  #gallery {
+  padding: 1rem;
+    height: 40vh;
+    position: absolute;
+    transform: translate(0%, -40%);
+    width: fit-content;
+  }
+
+  .container {
+    background-image: url('assets/elements/footer.png');
+    height: 85vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  
+}
