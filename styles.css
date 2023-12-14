@@ -353,7 +353,8 @@ section {
   width: 36vmin;
   height: 64vmin;
   border: 0px;
-  /* border-radius: 15px; */ box-shadow: 5px 5px 8px #000000;
+  /* border-radius: 15px; */
+  box-shadow: 5px 5px 8px #000000;
   object-fit: cover;
   object-position: 100% center;
 }
