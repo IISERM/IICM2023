@@ -51,7 +51,7 @@ const populateTimeline = async () => {
         if (index === 0 || event.day !== eventData[index - 1]?.day) {
             const dayElement = document.createElement('li');
             dayElement.classList.add('day');
-            dayElement.textContent = `DAY ${event.day}`;
+            dayElement.textContent = `&nbspDAY ${event.day}`;
             timelineContainer.appendChild(dayElement);
         }
 
