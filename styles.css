@@ -596,6 +596,10 @@ scrollbar-width: none;
     width: 4vh;
 }
 
+#event-dropdown {
+    font-size: 0.8rem;
+}
+
 .other-team-logo {
     height: 2vh;
 }
@@ -605,6 +609,10 @@ scrollbar-width: none;
 }
 .team h4 {
     font-size: 0.8rem;
+}
+
+.others {
+     width: 90vw;   
 }
 }
 
@@ -618,6 +626,10 @@ scrollbar-width: none;
     height: 3vh;
 }
 
+.others {
+    width: 75vw;
+}
+    
 }
 
 
