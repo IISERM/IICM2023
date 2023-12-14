@@ -30,23 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/firebase.js":
+/*!*************************!*\
+  !*** ./src/firebase.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore/lite */ \"./node_modules/firebase/firestore/lite/dist/esm/index.esm.js\");\n/* harmony import */ var _firebaseConfig__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./firebaseConfig */ \"./src/firebaseConfig.js\");\n\n\n\n\nconst firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_2__.firebaseConfig);\nconst db = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(firebaseApp);\n\nconst iicmTeams = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'iicmTeams');\nconst iicmEvents = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'iicmEvents');\n\n\n// Timeline Stuff\n\nconst allEventData = async () => {\n    const eventQuery = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.query)(iicmEvents);\n    const eventSnapshot = await (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getDocs)(eventQuery);\n    let eventData = [];\n    eventSnapshot.forEach((doc) => {\n        const perEventData = doc.data();\n        perEventData.day = parseInt(perEventData.WhichDay.split(\" \")[1]);\n        eventData.push(perEventData);\n    });\n\n    eventData.sort((a, b) => a.day === b.day ? a.Time.seconds - b.Time.seconds : a.day - b.day);\n\n    return eventData;\n}\n\nconst populateTimeline = async () => {\n    const eventData = await allEventData();\n    const timelineContainer = document.querySelector('.timeline-content ul');\n\n    eventData.forEach((event, index) => {\n        const eventElement = document.createElement('li');\n        eventElement.classList.add('event');\n\n        const posterElement = document.createElement('img');\n        posterElement.classList.add('event-poster');\n        posterElement.src = event.Poster;\n\n        const detailsElement = document.createElement('div');\n        detailsElement.classList.add('event-details');\n        detailsElement.innerHTML = `\n            <h1>${event.Name}</h1>\n            <p>${event.Description}</p>\n        `;\n\n        eventElement.appendChild(posterElement);\n        eventElement.appendChild(detailsElement);\n\n        if (index === 0 || event.day !== eventData[index - 1]?.day) {\n            const dayElement = document.createElement('li');\n            dayElement.classList.add('day');\n            dayElement.textContent = `DAY ${event.day}`;\n            timelineContainer.appendChild(dayElement);\n        }\n\n        timelineContainer.appendChild(eventElement);\n    });\n}\n\n\n// Leaderboard Stuff\n\nconst allTeamData = async () => {\n    const teamQuery = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.query)(iicmTeams);\n    const teamSnapshot = await (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getDocs)(teamQuery);\n    let teamData = [];\n    teamSnapshot.forEach((doc) => {\n        teamData.push(doc.data());\n    });\n    teamData.sort((a, b) => b.Points - a.Points);\n    return teamData;\n}\n\nconst populateLeaderboard = async () => {\n\n    const teamData = await allTeamData();\n\n\n};\n\n//Populate DOM\ndocument.addEventListener('DOMContentLoaded', () => {\n    populateTimeline();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvZmlyZWJhc2UuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUE2QztBQUNzQztBQUNqQzs7QUFFbEQsb0JBQW9CLDJEQUFhLENBQUMsMkRBQWM7QUFDaEQsV0FBVyxxRUFBWTs7QUFFdkIsa0JBQWtCLG1FQUFVO0FBQzVCLG1CQUFtQixtRUFBVTs7O0FBRzdCOztBQUVBO0FBQ0EsdUJBQXVCLDhEQUFLO0FBQzVCLGdDQUFnQyxnRUFBTztBQUN2QztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSzs7QUFFTDs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBLGtCQUFrQixXQUFXO0FBQzdCLGlCQUFpQixrQkFBa0I7QUFDbkM7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSw0Q0FBNEMsVUFBVTtBQUN0RDtBQUNBOztBQUVBO0FBQ0EsS0FBSztBQUNMOzs7QUFHQTs7QUFFQTtBQUNBLHNCQUFzQiw4REFBSztBQUMzQiwrQkFBK0IsZ0VBQU87QUFDdEM7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7O0FBR0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0EsQ0FBQyIsInNvdXJjZXMiOlsid2VicGFjazovL2lpY21fd2Vic2l0ZS8uL3NyYy9maXJlYmFzZS5qcz9kYzU5Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGluaXRpYWxpemVBcHAgfSBmcm9tICdmaXJlYmFzZS9hcHAnO1xuaW1wb3J0IHsgZ2V0RmlyZXN0b3JlLCBjb2xsZWN0aW9uLCBxdWVyeSwgZ2V0RG9jcyB9IGZyb20gJ2ZpcmViYXNlL2ZpcmVzdG9yZS9saXRlJztcbmltcG9ydCB7IGZpcmViYXNlQ29uZmlnIH0gZnJvbSAnLi9maXJlYmFzZUNvbmZpZyc7XG5cbmNvbnN0IGZpcmViYXNlQXBwID0gaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7XG5jb25zdCBkYiA9IGdldEZpcmVzdG9yZShmaXJlYmFzZUFwcCk7XG5cbmNvbnN0IGlpY21UZWFtcyA9IGNvbGxlY3Rpb24oZGIsICdpaWNtVGVhbXMnKTtcbmNvbnN0IGlpY21FdmVudHMgPSBjb2xsZWN0aW9uKGRiLCAnaWljbUV2ZW50cycpO1xuXG5cbi8vIFRpbWVsaW5lIFN0dWZmXG5cbmNvbnN0IGFsbEV2ZW50RGF0YSA9IGFzeW5jICgpID0+IHtcbiAgICBjb25zdCBldmVudFF1ZXJ5ID0gcXVlcnkoaWljbUV2ZW50cyk7XG4gICAgY29uc3QgZXZlbnRTbmFwc2hvdCA9IGF3YWl0IGdldERvY3MoZXZlbnRRdWVyeSk7XG4gICAgbGV0IGV2ZW50RGF0YSA9IFtdO1xuICAgIGV2ZW50U25hcHNob3QuZm9yRWFjaCgoZG9jKSA9PiB7XG4gICAgICAgIGNvbnN0IHBlckV2ZW50RGF0YSA9IGRvYy5kYXRhKCk7XG4gICAgICAgIHBlckV2ZW50RGF0YS5kYXkgPSBwYXJzZUludChwZXJFdmVudERhdGEuV2hpY2hEYXkuc3BsaXQoXCIgXCIpWzFdKTtcbiAgICAgICAgZXZlbnREYXRhLnB1c2gocGVyRXZlbnREYXRhKTtcbiAgICB9KTtcblxuICAgIGV2ZW50RGF0YS5zb3J0KChhLCBiKSA9PiBhLmRheSA9PT0gYi5kYXkgPyBhLlRpbWUuc2Vjb25kcyAtIGIuVGltZS5zZWNvbmRzIDogYS5kYXkgLSBiLmRheSk7XG5cbiAgICByZXR1cm4gZXZlbnREYXRhO1xufVxuXG5jb25zdCBwb3B1bGF0ZVRpbWVsaW5lID0gYXN5bmMgKCkgPT4ge1xuICAgIGNvbnN0IGV2ZW50RGF0YSA9IGF3YWl0IGFsbEV2ZW50RGF0YSgpO1xuICAgIGNvbnN0IHRpbWVsaW5lQ29udGFpbmVyID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnRpbWVsaW5lLWNvbnRlbnQgdWwnKTtcblxuICAgIGV2ZW50RGF0YS5mb3JFYWNoKChldmVudCwgaW5kZXgpID0+IHtcbiAgICAgICAgY29uc3QgZXZlbnRFbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnbGknKTtcbiAgICAgICAgZXZlbnRFbGVtZW50LmNsYXNzTGlzdC5hZGQoJ2V2ZW50Jyk7XG5cbiAgICAgICAgY29uc3QgcG9zdGVyRWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycpO1xuICAgICAgICBwb3N0ZXJFbGVtZW50LmNsYXNzTGlzdC5hZGQoJ2V2ZW50LXBvc3RlcicpO1xuICAgICAgICBwb3N0ZXJFbGVtZW50LnNyYyA9IGV2ZW50LlBvc3RlcjtcblxuICAgICAgICBjb25zdCBkZXRhaWxzRWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuICAgICAgICBkZXRhaWxzRWxlbWVudC5jbGFzc0xpc3QuYWRkKCdldmVudC1kZXRhaWxzJyk7XG4gICAgICAgIGRldGFpbHNFbGVtZW50LmlubmVySFRNTCA9IGBcbiAgICAgICAgICAgIDxoMT4ke2V2ZW50Lk5hbWV9PC9oMT5cbiAgICAgICAgICAgIDxwPiR7ZXZlbnQuRGVzY3JpcHRpb259PC9wPlxuICAgICAgICBgO1xuXG4gICAgICAgIGV2ZW50RWxlbWVudC5hcHBlbmRDaGlsZChwb3N0ZXJFbGVtZW50KTtcbiAgICAgICAgZXZlbnRFbGVtZW50LmFwcGVuZENoaWxkKGRldGFpbHNFbGVtZW50KTtcblxuICAgICAgICBpZiAoaW5kZXggPT09IDAgfHwgZXZlbnQuZGF5ICE9PSBldmVudERhdGFbaW5kZXggLSAxXT8uZGF5KSB7XG4gICAgICAgICAgICBjb25zdCBkYXlFbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnbGknKTtcbiAgICAgICAgICAgIGRheUVsZW1lbnQuY2xhc3NMaXN0LmFkZCgnZGF5Jyk7XG4gICAgICAgICAgICBkYXlFbGVtZW50LnRleHRDb250ZW50ID0gYERBWSAke2V2ZW50LmRheX1gO1xuICAgICAgICAgICAgdGltZWxpbmVDb250YWluZXIuYXBwZW5kQ2hpbGQoZGF5RWxlbWVudCk7XG4gICAgICAgIH1cblxuICAgICAgICB0aW1lbGluZUNvbnRhaW5lci5hcHBlbmRDaGlsZChldmVudEVsZW1lbnQpO1xuICAgIH0pO1xufVxuXG5cbi8vIExlYWRlcmJvYXJkIFN0dWZmXG5cbmNvbnN0IGFsbFRlYW1EYXRhID0gYXN5bmMgKCkgPT4ge1xuICAgIGNvbnN0IHRlYW1RdWVyeSA9IHF1ZXJ5KGlpY21UZWFtcyk7XG4gICAgY29uc3QgdGVhbVNuYXBzaG90ID0gYXdhaXQgZ2V0RG9jcyh0ZWFtUXVlcnkpO1xuICAgIGxldCB0ZWFtRGF0YSA9IFtdO1xuICAgIHRlYW1TbmFwc2hvdC5mb3JFYWNoKChkb2MpID0+IHtcbiAgICAgICAgdGVhbURhdGEucHVzaChkb2MuZGF0YSgpKTtcbiAgICB9KTtcbiAgICB0ZWFtRGF0YS5zb3J0KChhLCBiKSA9PiBiLlBvaW50cyAtIGEuUG9pbnRzKTtcbiAgICByZXR1cm4gdGVhbURhdGE7XG59XG5cbmNvbnN0IHBvcHVsYXRlTGVhZGVyYm9hcmQgPSBhc3luYyAoKSA9PiB7XG5cbiAgICBjb25zdCB0ZWFtRGF0YSA9IGF3YWl0IGFsbFRlYW1EYXRhKCk7XG5cblxufTtcblxuLy9Qb3B1bGF0ZSBET01cbmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ0RPTUNvbnRlbnRMb2FkZWQnLCAoKSA9PiB7XG4gICAgcG9wdWxhdGVUaW1lbGluZSgpO1xufSk7Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/firebase.js\n");
+
+/***/ }),
+
 /***/ "./src/firebaseConfig.js":
 /*!*******************************!*\
   !*** ./src/firebaseConfig.js ***!
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   firebaseConfig: () => (/* binding */ firebaseConfig)\n/* harmony export */ });\nconst firebaseConfig = {\n    apiKey: \"AIzaSyCQ_Vb-efIKRltJRC8KuyfrwDT6bjKBeYQ\",\n    authDomain: \"insight-iiserm.firebaseapp.com\",\n    projectId: \"insight-iiserm\",\n    storageBucket: \"insight-iiserm.appspot.com\",\n    messagingSenderId: \"194909794071\",\n    appId: \"1:194909794071:web:7706ac816dd423e3281152\",\n    measurementId: \"G-H8CL6MTXYB\"\n}\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvZmlyZWJhc2VDb25maWcuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZXMiOlsid2VicGFjazovL2lpY21fd2Vic2l0ZS8uL3NyYy9maXJlYmFzZUNvbmZpZy5qcz8xNTQzIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGZpcmViYXNlQ29uZmlnID0ge1xuICAgIGFwaUtleTogXCJBSXphU3lDUV9WYi1lZklLUmx0SlJDOEt1eWZyd0RUNmJqS0JlWVFcIixcbiAgICBhdXRoRG9tYWluOiBcImluc2lnaHQtaWlzZXJtLmZpcmViYXNlYXBwLmNvbVwiLFxuICAgIHByb2plY3RJZDogXCJpbnNpZ2h0LWlpc2VybVwiLFxuICAgIHN0b3JhZ2VCdWNrZXQ6IFwiaW5zaWdodC1paXNlcm0uYXBwc3BvdC5jb21cIixcbiAgICBtZXNzYWdpbmdTZW5kZXJJZDogXCIxOTQ5MDk3OTQwNzFcIixcbiAgICBhcHBJZDogXCIxOjE5NDkwOTc5NDA3MTp3ZWI6NzcwNmFjODE2ZGQ0MjNlMzI4MTE1MlwiLFxuICAgIG1lYXN1cmVtZW50SWQ6IFwiRy1IOENMNk1UWFlCXCJcbn1cblxuZXhwb3J0IHsgZmlyZWJhc2VDb25maWcgfTsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/firebaseConfig.js\n");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore/lite */ \"./node_modules/firebase/firestore/lite/dist/esm/index.esm.js\");\n/* harmony import */ var _firebaseConfig__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./firebaseConfig */ \"./src/firebaseConfig.js\");\n// src/index.js\n\n\n\n\nconst firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(_firebaseConfig__WEBPACK_IMPORTED_MODULE_2__.firebaseConfig);\nconst db = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(firebaseApp);\n\nconst iicmTeams = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'iicmTeams');\nconst iicmEvents = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'iicmEvents');\n\nconst allEventData = async () => {\n    const eventQuery = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.query)(iicmEvents);\n    const eventSnapshot = await (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getDocs)(eventQuery);\n    let eventData = [];\n    eventSnapshot.forEach((doc) => {\n        eventData.push(doc.data());\n    });\n    return eventData;\n}\n\nconst allTeamData = async () => {\n    const teamQuery = (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.query)(iicmTeams);\n    const teamSnapshot = await (0,firebase_firestore_lite__WEBPACK_IMPORTED_MODULE_1__.getDocs)(teamQuery);\n    let teamData = [];\n    teamSnapshot.forEach((doc) => {\n        teamData.push(doc.data());\n    });\n    return teamData;\n}\n\nconsole.log(await allTeamData());\nconsole.log(await allEventData());\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvaW5kZXguanMiLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTtBQUM2QztBQUM2QztBQUN4Qzs7QUFFbEQsb0JBQW9CLDJEQUFhLENBQUMsMkRBQWM7QUFDaEQsV0FBVyxxRUFBWTs7QUFFdkIsa0JBQWtCLG1FQUFVO0FBQzVCLG1CQUFtQixtRUFBVTs7QUFFN0I7QUFDQSx1QkFBdUIsOERBQUs7QUFDNUIsZ0NBQWdDLGdFQUFPO0FBQ3ZDO0FBQ0E7QUFDQTtBQUNBLEtBQUs7QUFDTDtBQUNBOztBQUVBO0FBQ0Esc0JBQXNCLDhEQUFLO0FBQzNCLCtCQUErQixnRUFBTztBQUN0QztBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTs7QUFFQTtBQUNBLGtDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vaWljbV93ZWJzaXRlLy4vc3JjL2luZGV4LmpzP2I2MzUiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gc3JjL2luZGV4LmpzXG5pbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSAnZmlyZWJhc2UvYXBwJztcbmltcG9ydCB7IGdldEZpcmVzdG9yZSwgY29sbGVjdGlvbiwgcXVlcnksIHdoZXJlLCBnZXREb2NzIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlL2xpdGUnO1xuaW1wb3J0IHsgZmlyZWJhc2VDb25maWcgfSBmcm9tICcuL2ZpcmViYXNlQ29uZmlnJztcblxuY29uc3QgZmlyZWJhc2VBcHAgPSBpbml0aWFsaXplQXBwKGZpcmViYXNlQ29uZmlnKTtcbmNvbnN0IGRiID0gZ2V0RmlyZXN0b3JlKGZpcmViYXNlQXBwKTtcblxuY29uc3QgaWljbVRlYW1zID0gY29sbGVjdGlvbihkYiwgJ2lpY21UZWFtcycpO1xuY29uc3QgaWljbUV2ZW50cyA9IGNvbGxlY3Rpb24oZGIsICdpaWNtRXZlbnRzJyk7XG5cbmNvbnN0IGFsbEV2ZW50RGF0YSA9IGFzeW5jICgpID0+IHtcbiAgICBjb25zdCBldmVudFF1ZXJ5ID0gcXVlcnkoaWljbUV2ZW50cyk7XG4gICAgY29uc3QgZXZlbnRTbmFwc2hvdCA9IGF3YWl0IGdldERvY3MoZXZlbnRRdWVyeSk7XG4gICAgbGV0IGV2ZW50RGF0YSA9IFtdO1xuICAgIGV2ZW50U25hcHNob3QuZm9yRWFjaCgoZG9jKSA9PiB7XG4gICAgICAgIGV2ZW50RGF0YS5wdXNoKGRvYy5kYXRhKCkpO1xuICAgIH0pO1xuICAgIHJldHVybiBldmVudERhdGE7XG59XG5cbmNvbnN0IGFsbFRlYW1EYXRhID0gYXN5bmMgKCkgPT4ge1xuICAgIGNvbnN0IHRlYW1RdWVyeSA9IHF1ZXJ5KGlpY21UZWFtcyk7XG4gICAgY29uc3QgdGVhbVNuYXBzaG90ID0gYXdhaXQgZ2V0RG9jcyh0ZWFtUXVlcnkpO1xuICAgIGxldCB0ZWFtRGF0YSA9IFtdO1xuICAgIHRlYW1TbmFwc2hvdC5mb3JFYWNoKChkb2MpID0+IHtcbiAgICAgICAgdGVhbURhdGEucHVzaChkb2MuZGF0YSgpKTtcbiAgICB9KTtcbiAgICByZXR1cm4gdGVhbURhdGE7XG59XG5cbmNvbnNvbGUubG9nKGF3YWl0IGFsbFRlYW1EYXRhKCkpO1xuY29uc29sZS5sb2coYXdhaXQgYWxsRXZlbnREYXRhKCkpOyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/index.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   firebaseConfig: () => (/* binding */ firebaseConfig)\n/* harmony export */ });\n//Location: src/firebaseConfig.js\nconst firebaseConfig = {\n    apiKey: \"AIzaSyCQ_Vb-efIKRltJRC8KuyfrwDT6bjKBeYQ\",\n    authDomain: \"insight-iiserm.firebaseapp.com\",\n    projectId: \"insight-iiserm\",\n    storageBucket: \"insight-iiserm.appspot.com\",\n    messagingSenderId: \"194909794071\",\n    appId: \"1:194909794071:web:7706ac816dd423e3281152\",\n    measurementId: \"G-H8CL6MTXYB\"\n}\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvZmlyZWJhc2VDb25maWcuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vaWljbV93ZWJzaXRlLy4vc3JjL2ZpcmViYXNlQ29uZmlnLmpzPzE1NDMiXSwic291cmNlc0NvbnRlbnQiOlsiLy9Mb2NhdGlvbjogc3JjL2ZpcmViYXNlQ29uZmlnLmpzXG5jb25zdCBmaXJlYmFzZUNvbmZpZyA9IHtcbiAgICBhcGlLZXk6IFwiQUl6YVN5Q1FfVmItZWZJS1JsdEpSQzhLdXlmcndEVDZiaktCZVlRXCIsXG4gICAgYXV0aERvbWFpbjogXCJpbnNpZ2h0LWlpc2VybS5maXJlYmFzZWFwcC5jb21cIixcbiAgICBwcm9qZWN0SWQ6IFwiaW5zaWdodC1paXNlcm1cIixcbiAgICBzdG9yYWdlQnVja2V0OiBcImluc2lnaHQtaWlzZXJtLmFwcHNwb3QuY29tXCIsXG4gICAgbWVzc2FnaW5nU2VuZGVySWQ6IFwiMTk0OTA5Nzk0MDcxXCIsXG4gICAgYXBwSWQ6IFwiMToxOTQ5MDk3OTQwNzE6d2ViOjc3MDZhYzgxNmRkNDIzZTMyODExNTJcIixcbiAgICBtZWFzdXJlbWVudElkOiBcIkctSDhDTDZNVFhZQlwiXG59XG5cbmV4cG9ydCB7IGZpcmViYXNlQ29uZmlnIH07Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/firebaseConfig.js\n");
 
 /***/ }),
 
@@ -147,75 +147,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -261,7 +192,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/firebase.js");
 /******/ 	
 /******/ })()
 ;
