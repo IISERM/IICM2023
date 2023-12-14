@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 * {
     box-sizing: border-box;
 }
@@ -413,6 +415,213 @@ section {
 }
 
 /* ************************************************************** */
+/* LEADERBOARD */
+/* ************************************************************** */
+
+.leaderboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    background-image: url('./assets/elements/leaderboard-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+.leaderboard-title {
+    font-size: 3rem;
+    font-family: 'Rampart One', sans-serif;
+    color: white;
+    height: 2rem;
+
+}
+
+#event-dropdown {
+    background-color: #E9D9FF;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: none;
+    height: fit-content;
+    width: 25vw;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    padding: 0.5rem;
+}
+
+.podium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    overflow: visible;
+    margin-top: 2rem;
+}
+
+.insti_logo {
+    height: 3.5rem;
+}
+
+.first {
+    height: 9rem;
+    width: 9rem;
+    background-color: white;
+    border-radius: 100px;
+    border-radius: 50%;
+    border: #FFA828 5px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.second {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    width: 7rem;
+    background-color: white;
+    border-radius: 100px;
+    border-radius: 50%;
+    border: silver 5px solid;
+}
+.third {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    width: 7rem;
+    background-color: white;
+    border-radius: 100px;
+    border-radius: 50%;
+    border: brown 5px solid;
+}
+
+.podium_insti {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0px;
+}
+
+.podium_insti > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: white;
+}
+.podium_insti > h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #E9D9FF;
+}
+
+.separator {
+    width: 45vw;
+    color: #c3c6c9;
+}
+
+.others {
+    height: 45vh;
+    width: 50vw;
+    padding: 1.5rem;
+    border: 1px solid #000;
+    border-radius: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;margin-top: 1rem;
+    margin-top: 3rem;
+background: linear-gradient(128deg, #F6EFFF -203.7%, rgba(255, 252, 253, 0.00) 166.06%);
+scrollbar-width: none;
+}
+
+.others::-webkit-scrollbar{
+    display: none;
+}
+
+.team {
+    display: flex;
+    height: max-content;
+    width: inherit;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.other-team-circle {
+    height: 7vh;
+    width: 7vh;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.other-team-logo {
+    height: 4vh;
+}
+
+
+.team h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #f6efff;
+}
+.team h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #f6efff;
+}
+.team > img {
+    height: 2.5rem;
+}
+
+.iicm-logo {
+    height: 5vh;
+    width: inherit;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iicm-logo img {
+    height: 10vh;
+}
+
+@media(max-width: 600px) {
+.other-team-circle {
+    height: 4vh;
+    width: 4vh;
+}
+
+.other-team-logo {
+    height: 2vh;
+}
+
+.team h3 {
+    font-size: 1rem;
+}
+.team h4 {
+    font-size: 0.8rem;
+}
+}
+
+@media(max-width: 1200px) {
+.other-team-circle {
+    height: 5vh;
+    width: 5vh;
+}
+
+.other-team-logo {
+    height: 3vh;
+}
+
+}
+
+
+/* ************************************************************** */
 /* FOOTER */
 /* ************************************************************** */
 
@@ -425,3 +634,4 @@ section {
     background-position: bottom;
     display: block;
 }
+
