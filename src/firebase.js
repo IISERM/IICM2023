@@ -28,16 +28,27 @@ const allEventData = async () => {
   const eventQuery = query(iicmEvents);
   const eventSnapshot = await getDocs(eventQuery);
   let eventData = [];
+  let onlineEventData = [];
   eventSnapshot.forEach((doc) => {
     const perEventData = doc.data();
-    perEventData.day = parseInt(perEventData.WhichDay.split(" ")[1]);
-    eventData.push(perEventData);
+    const parsedDay = parseInt(perEventData.WhichDay.split(" ")[1]);
+    perEventData.day = isNaN(parsedDay) ? "Online" : parsedDay;
+
+    if ( typeof perEventData.day === 'number' ){
+      eventData.push(perEventData);
+    }
+    else {
+      onlineEventData.push(perEventData);
+    }
+    
   });
   eventData.sort((a, b) =>
     a.day === b.day ? a.Time.seconds - b.Time.seconds : a.day - b.day,
   );
 
-  return eventData;
+  const allEventData = [...eventData, ...onlineEventData];
+
+  return allEventData;
 };
 
 const populateTimeline = async () => {
@@ -62,11 +73,18 @@ const populateTimeline = async () => {
     eventElement.appendChild(posterElement);
     eventElement.appendChild(detailsElement);
 
-    if (index === 0 || event.day !== eventData[index - 1]?.day) {
+    if ( typeof event.day === 'number' && (index === 0 || event.day !== eventData[index - 1]?.day) ){
       const dayElement = document.createElement("li");
       dayElement.classList.add("day");
       const nbsp = "\u00A0";
       dayElement.textContent = `${nbsp}DAY ${event.day}`;
+      timelineContainer.appendChild(dayElement);
+    }
+    else if ( event.day === 'Online' ){
+      const dayElement = document.createElement("li");
+      dayElement.classList.add("day");
+      const nbsp = "\u00A0";
+      dayElement.textContent = `Online Events`;
       timelineContainer.appendChild(dayElement);
     }
 
@@ -91,22 +109,19 @@ const allTeamData = async () => {
 const populateEventDropdown = async () => {
   const eventDropdown = document.getElementById("event-dropdown");
 
-  // Fetch event data from Firebase
   const preFilterEventData = await allEventData();
 
   //remove the first and last events
   preFilterEventData.shift();
   preFilterEventData.pop();
 
-  // Filter out events that do not have a ResultsDeclared is undefined or false
   const eventData = preFilterEventData.filter((event) => event.ResultsDeclared);
   eventData.unshift({ ID: "Overall", Name: "Overall" });
 
-  // Create an option for each event and append it to the dropdown
   eventData.forEach((event) => {
     const optionElement = document.createElement("option");
-    optionElement.value = event.Name; // Set the value to the event ID or any unique identifier
-    optionElement.textContent = event.Name; // Set the text to the event name or any property you want to display
+    optionElement.value = event.Name;
+    optionElement.textContent = event.Name;
     eventDropdown.appendChild(optionElement);
   });
 };
@@ -150,7 +165,7 @@ const populateOverallPodium = (container, teams) => {
 
     podiumElement.appendChild(rankElement);
     rankElement.appendChild(logoElement);
-    podiumElement.appendChild(medalElement); // Add medal element
+    podiumElement.appendChild(medalElement);
     podiumElement.appendChild(pointsElement);
     podiumElement.appendChild(nameElement);
 
@@ -198,7 +213,7 @@ const populateEventPodium = (container, teams, event) => {
 
     podiumElement.appendChild(rankElement);
     rankElement.appendChild(logoElement);
-    podiumElement.appendChild(medalElement); // Add medal element
+    podiumElement.appendChild(medalElement);
     podiumElement.appendChild(pointsElement);
     podiumElement.appendChild(nameElement);
 
@@ -264,8 +279,6 @@ const populateLeaderboard = async (selectedEvent) => {
   const othersContainer = document.querySelector(".others");
   // remove the others container permanently
   othersContainer.style.display = "none";
-  console.log("Pop Event");
-  console.log(othersContainer.style.display);
 };
 
 //Populate DOM
@@ -277,6 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const eventDropdown = document.getElementById("event-dropdown");
   eventDropdown.addEventListener("change", (event) => {
     const selectedEventID = event.target.value;
-    populateLeaderboard(selectedEventID); // Pass the selected event ID to populateLeaderboard
+    populateLeaderboard(selectedEventID);
   });
 });
